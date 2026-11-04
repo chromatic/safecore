@@ -19,6 +19,7 @@ const store = 'whippet.dev.encrypted.v1';
       await page.goto('http://localhost:8787/');
       await page.evaluate(({store,sealed}) => localStorage.setItem(store,sealed), {store,sealed});
       await page.reload();
+      await page.locator('.holdings').waitFor();
       assert.equal(await page.locator('[data-overview-coin]').count(),2);
       assert.equal(await page.locator('[data-overview-coin="doge"]').count(),0);
       await page.getByRole('link',{name:'Add coins'}).click();

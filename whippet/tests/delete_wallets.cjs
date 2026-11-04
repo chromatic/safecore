@@ -25,6 +25,7 @@ const assert=require('node:assert/strict'),{chromium}=require('./browser-helper.
   assert.equal(await p.evaluate(id=>localStorage.getItem('corevault.receive.'+id),ids[0]),null);
   assert.equal(await p.evaluate(id=>localStorage.getItem('corevault.receive.'+id),ids[1]),'{}');
   await p.locator(`[data-delete-wallet="${ids[1]}"]`).click();await p.locator('#cancel-remove').click();
+  await p.locator('.saved-wallet').first().waitFor();
   assert.equal(await p.locator('.saved-wallet').count(),2);
   for(const width of [320,390,430]){await p.setViewportSize({width,height:844});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);}
   await p.screenshot({path:'whippet/test-results/wallet-delete-list.png',fullPage:true});
@@ -33,7 +34,7 @@ const assert=require('node:assert/strict'),{chromium}=require('./browser-helper.
   assert.equal(await p.evaluate(()=>localStorage.getItem('whippet.dev.encrypted.v1')),null);
   assert.equal(await p.evaluate(()=>WalletLibrary.create(localStorage).list().length),1);
   assert.equal(await p.evaluate(()=>localStorage.getItem('unrelated')),'preserve');
-  await p.reload();await p.locator('.wallets-shortcut').click();assert.equal(await p.locator('.saved-wallet').count(),1);
+  await p.reload();await p.locator('.wallets-shortcut').click();await p.locator('.saved-wallet').first().waitFor();assert.equal(await p.locator('.saved-wallet').count(),1);
   assert.deepEqual(errors,[]);console.log('PASS: targeted inactive/active wallet deletion, cancel/confirmation guards, scoped cache cleanup, other-wallet preservation and phone layout.');
  }finally{await b.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
