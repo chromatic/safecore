@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   wallet:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Fetch exact event commit (public repository)
@@ -20,7 +20,7 @@ jobs:
           git checkout --detach FETCH_HEAD
       - run: npm ci --ignore-scripts
       - run: npm test
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps --only-shell chromium
       - run: npm run test:browser
       - run: python3 scripts/check-public-tree.py
       - run: python3 -m unittest discover -s scripts/tests -v
