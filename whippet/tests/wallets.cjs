@@ -131,6 +131,7 @@ const store = 'whippet.dev.encrypted.v1';
     await page.evaluate(()=>delete document.hidden);
     assert.equal(await page.locator('#seed-password').inputValue(),'');
     await page.locator('.wallets-shortcut').click();
+    await page.locator('.saved-wallet').first().waitFor();
     assert.equal(await page.locator('.saved-wallet').count(),2);
     await page.locator('.saved-wallet').filter({hasText:'Open fixture'}).getByRole('button',{name:'Open',exact:true}).click();
     await page.waitForFunction(()=>document.documentElement.dataset.walletState === 'unlocked');

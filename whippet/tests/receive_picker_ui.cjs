@@ -16,7 +16,7 @@ const E=require('../www/engine.js'),ethers=require('../www/assets/ethers.umd.min
   assert.equal(await p.locator('[data-coin]').count(),2);
   await choose('pep');assert.equal(await p.locator('#address').textContent(),accounts.pep.address);await p.locator('#reuse-first').check();
   await choose('wht');assert.equal(await p.locator('#address').textContent(),accounts.wht.address);assert.equal(await p.locator('#reuse-first').isChecked(),false);await p.locator('#reuse-first').check();
-  await p.locator('[data-nav="wallet"]').click();assert.equal(await p.locator('.holding-row').count(),2);
+  await p.locator('[data-nav="wallet"]').click();await p.locator('.holdings').waitFor();assert.equal(await p.locator('.holding-row').count(),2);
   await p.locator('[data-nav="receive"]').click();await empty();await choose('pep');assert.equal(await p.locator('#reuse-first').isChecked(),true);
   await p.reload();await empty();await choose('wht');assert.equal(await p.locator('#reuse-first').isChecked(),true);
   assert.equal(await p.locator('#previous-address').isDisabled(),true);assert.equal(await p.locator('#next-address').isDisabled(),true);
@@ -26,7 +26,7 @@ const E=require('../www/engine.js'),ethers=require('../www/assets/ethers.umd.min
    await p.locator('#address').waitFor();assert.equal(await p.locator('#address').textContent(),accounts[coin].address);
    assert.equal(await p.locator('.page-head').innerText(),'Receive');
   }
-  await p.locator('[data-nav=send]').click();assert.equal(await p.locator('.page-head').innerText(),'Send');
+  await p.locator('[data-nav=send]').click();await p.locator('#send-coin').waitFor();assert.equal(await p.locator('.page-head').innerText(),'Send');
   await p.locator('[data-nav=receive]').click();await empty();
   assert.deepEqual(errors,[]);console.log('PASS: Receive requires an explicit asset choice; zero-balance coins supported; correct per-network address; independent Overview selection; first-address pins survive route changes and reload.');
  }finally{await browser.close();}
