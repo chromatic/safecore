@@ -19,6 +19,7 @@ const assert=require('node:assert/strict'),{chromium}=require('./browser-helper.
     assert.ok((await page.locator('.mobile-brand img').getAttribute('src')).endsWith(`safecore-${String(i).padStart(2,'0')}.svg`));
   }
   await page.getByRole('link',{name:'Cancel',exact:true}).click();
+  await page.locator('.brand-grid').first().waitFor({state:'detached'});
   assert.equal(await page.locator('.mobile-brand img').getAttribute('src'),'assets/icons/safecore-26.svg');
   await page.goto('http://localhost:8787/#icons');await page.locator('[data-brand="30"]').click();await page.locator('#save-brand').click();
   await page.locator('.holdings').waitFor();await page.reload();

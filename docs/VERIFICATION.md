@@ -16,6 +16,7 @@ Checks performed against the standalone source tree for 0.1.0-test.9:
   or private signing material packaged. Existing dependency/deprecation warnings
   remain maintenance work, not evidence of a security audit.
 - ElectrumX container build plus ten Whippet/history-compaction regression tests.
+- Blockbook's complete native/RocksDB container build, including its PEP adapter.
 - Compose syntax validation using placeholder configuration, not production values.
 - Seven offline release-publisher tests: tag/hash/debug guards, draft publication,
   no overwriting published assets and no token forwarding to an untrusted host.
@@ -26,6 +27,11 @@ The generic multi-service deployment has not been brought up against newly synce
 mainnet nodes as part of publication. Operators must perform the documented
 readiness, TLS and firewall checks. A unit test, successful build or clean secret
 scan does not establish production security or consensus compatibility.
+
+GitHub's fresh browser environment exposed test assertions that read the previous
+screen immediately after hash navigation. The affected wallet-list, receive,
+deletion and icon tests now wait for rendered state, not an arbitrary delay.
+The wallet's runtime behavior and released APK are unchanged by those test fixes.
 
 The initial Blockbook Dockerfile used obsolete Debian Bullseye package URLs that
 failed during this check. The standalone build uses Bookworm, removes unnecessary
