@@ -1,0 +1,12 @@
+{
+  "name": "safecore-tests",
+  "private": true,
+  "scripts": {
+    "test": "node scripts/test-wallet.cjs",
+    "test:browser": "node scripts/test-browser.cjs"
+  },
+  "devDependencies": {
+    "bitcore-lib-doge": "10.10.5",
+    "playwright": "1.62.1"
+  }
+}

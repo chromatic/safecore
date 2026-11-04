@@ -1,0 +1,10 @@
+server=1
+txindex=1
+prune=0
+disablewallet=1
+rpcport=33665
+rpcbind=127.0.0.1
+rpcallowip=127.0.0.1
+rpcuser=safecore
+rpcpassword=CHANGE_ME
+# Configure private Docker reachability as described in SELF_HOSTING.md.

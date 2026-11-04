@@ -1,0 +1,75 @@
+name: safecore
+x-electrum: &electrum
+  build: ../services/electrumx
+  restart: unless-stopped
+  stop_grace_period: 2m
+  extra_hosts:
+    - host.docker.internal:host-gateway
+  security_opt:
+    - no-new-privileges:true
+  logging:
+    driver: json-file
+    options: {max-size: 10m, max-file: '3'}
+x-electrum-env: &electrum-env
+  NET: mainnet
+  DB_DIRECTORY: /data
+  DB_ENGINE: leveldb
+  SERVICES: wss://:50004,rpc://127.0.0.1:8000
+  SSL_CERTFILE: /certs/fullchain.pem
+  SSL_KEYFILE: /certs/privkey.pem
+  PEER_DISCOVERY: 'off'
+  PEER_ANNOUNCE: ''
+  CACHE_MB: '256'
+  MAX_SESSIONS: '200'
+  HISTORY_COMPACTION_THRESHOLD: '50000'
+services:
+  electrum-pep:
+    <<: *electrum
+    environment:
+      <<: *electrum-env
+      COIN: Pepecoin
+      DAEMON_URL: ${PEP_DAEMON_URL:?Set PEP_DAEMON_URL in .env}
+    volumes:
+      - pep-electrum:/data
+      - ${TLS_CERT_DIR:-./certs}:/certs:ro
+    ports: ['${PEP_WSS_PORT:-50004}:50004']
+  electrum-wht:
+    <<: *electrum
+    environment:
+      <<: *electrum-env
+      COIN: Whippet
+      DAEMON_URL: ${WHT_DAEMON_URL:?Set WHT_DAEMON_URL in .env}
+    volumes:
+      - wht-electrum:/data
+      - ${TLS_CERT_DIR:-./certs}:/certs:ro
+    ports: ['${WHT_WSS_PORT:-50005}:50004']
+  blockbook-pep:
+    build:
+      context: ../services/blockbook
+      args: {PORTABLE_ROCKSDB: '1'}
+    restart: unless-stopped
+    stop_grace_period: 2m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - -blockchaincfg=/config/blockbook.json
+      - -datadir=/data
+      - -sync
+      - -public=:9130
+      - -workers=1
+      - -dbcache=268435456
+      - -resyncindexperiod=30000
+      - -resyncmempoolperiod=10000
+    volumes:
+      - pep-blockbook:/data
+      - ./blockbook.local.json:/config/blockbook.json:ro
+    ports: ['127.0.0.1:9130:9130']
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: '3'}
+volumes:
+  pep-electrum:
+  wht-electrum:
+  pep-blockbook:

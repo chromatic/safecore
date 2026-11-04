@@ -1,0 +1,75 @@
+{
+    "coin": {
+        "name": "Pepecoin Testnet",
+        "shortcut": "PEPETEST",
+        "label": "Pepecoin Testnet",
+        "alias": "pepecoin_testnet"
+    },
+    "ports": {
+        "backend_rpc": 18038,
+        "backend_message_queue": 48338,
+        "blockbook_internal": 19038,
+        "blockbook_public": 19138
+    },
+    "ipc": {
+        "rpc_url_template": "http://127.0.0.1:{{.Ports.BackendRPC}}",
+        "rpc_user": "rpc",
+        "rpc_pass": "rpcp",
+        "rpc_timeout": 25,
+        "message_queue_binding_template": "tcp://127.0.0.1:{{.Ports.BackendMessageQueue}}"
+    },
+    "backend": {
+        "package_name": "backend-pepecoin-testnet",
+        "package_revision": "satoshilabs-1",
+        "system_user": "pepecoin",
+        "version": "1.0.1",
+        "binary_url": "https://github.com/pepecoinppc/pepecoin/releases/download/v1.0.1/pepecoin-1.0.1-x86_64-linux-gnu.tar.gz",
+        "verification_type": "sha256",
+        "verification_source": "6eb154246531a2a25d8ee0721d6df860f75842ecfcb63b6b481cb882c3212087",
+        "extract_command": "tar -C backend --strip 1 -xf",
+        "exclude_files": ["bin/pepecoin-qt"],
+        "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/bin/pepecoind -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid -rest",
+        "logrotate_files_template": "{{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend/*.log",
+        "postinst_script_template": "",
+        "service_type": "forking",
+        "service_additional_params_template": "",
+        "protect_memory": false,
+        "mainnet": false,
+        "server_config_file": "bitcoin_like.conf",
+        "client_config_file": "bitcoin_like_client.conf",
+        "additional_params": {
+            "discover": 0,
+            "rpcthreads": 16,
+            "upnp": 0,
+            "whitelist": "127.0.0.1"
+        },
+        "platforms": {
+            "arm64": {
+                "binary_url": "https://github.com/pepecoinppc/pepecoin/releases/download/v1.0.1/pepecoin-1.0.1-aarch64-linux-gnu.tar.gz",
+                "verification_source": "35f1d61bad10e78813c52c8e5f971feb5ca362a6c30c596c04d39d741f5426ef",
+                "exclude_files": []
+            }
+        }
+    },
+    "blockbook": {
+        "package_name": "blockbook-pepecoin-testnet",
+        "system_user": "blockbook-pepecoin",
+        "internal_binding_template": ":{{.Ports.BlockbookInternal}}",
+        "public_binding_template": ":{{.Ports.BlockbookPublic}}",
+        "explorer_url": "",
+        "additional_params": "-resyncindexperiod=30011 -resyncmempoolperiod=2011",
+        "block_chain": {
+            "parse": true,
+            "mempool_workers": 8,
+            "mempool_sub_workers": 2,
+            "block_addresses_to_keep": 300,
+            "xpub_magic": 70617039,
+            "slip44": 1,
+            "additional_params": {}
+        }
+    },
+    "meta": {
+        "package_maintainer": "IT Admin",
+        "package_maintainer_email": "it@satoshilabs.com"
+    }
+}

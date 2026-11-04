@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Chain Token</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="m32 7 22 13v24L32 57 10 44V20Z" fill="#163945" stroke="#57baff" stroke-width="2.5"/><circle cx="32" cy="32" r="17" stroke="#45d68e" stroke-width="2"/><path d="m29 28-3-3a5 5 0 0 0-7 7l7 7a5 5 0 0 0 7 0m2-3 3 3a5 5 0 0 0 7-7l-7-7a5 5 0 0 0-7 0m-5 10 12-12" stroke="#d9fff0" stroke-width="3"/>
+</svg>

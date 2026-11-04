@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Circuit Core</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="M26 21V11h-9m26 0h-5v10M21 27H10v-8m11 18H10v8m16-2v11h-9m21-11v11h9m-4-27h11v-8m-11 18h11v8" stroke="#57baff" stroke-width="2.5"/><rect x="21" y="21" width="22" height="22" rx="5" fill="#45d68e"/><path d="m32 26 6 6-6 6-6-6Z" fill="#10202d"/><circle cx="17" cy="11" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/><circle cx="43" cy="11" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/><circle cx="10" cy="19" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/><circle cx="10" cy="45" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/><circle cx="17" cy="54" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/><circle cx="47" cy="54" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/><circle cx="54" cy="19" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/><circle cx="54" cy="45" r="3" fill="#b7ffe0" stroke="#10202d" stroke-width="2"/>
+</svg>

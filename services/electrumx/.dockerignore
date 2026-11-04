@@ -1,0 +1,10 @@
+.git
+.env*
+data
+certs
+*.key
+*.pem
+*.log
+__pycache__
+.pytest_cache
+tests

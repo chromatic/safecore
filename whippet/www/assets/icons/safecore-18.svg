@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Node Coin</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="m15 15 34 34m0-34L15 49M9 32h46M32 9v46" stroke="#2d6880" stroke-width="2.5"/><circle cx="32" cy="32" r="16" fill="#45d68e"/><circle cx="32" cy="32" r="11" stroke="#10202d" stroke-width="1.5"/><path d="m32 24 6 4v8l-6 4-6-4v-8Z" fill="#10202d"/><g fill="#57baff"><circle cx="14" cy="14" r="4"/><circle cx="50" cy="14" r="4"/><circle cx="14" cy="50" r="4"/><circle cx="50" cy="50" r="4"/></g><g fill="#c8ffe5"><circle cx="32" cy="8" r="3"/><circle cx="56" cy="32" r="3"/><circle cx="32" cy="56" r="3"/><circle cx="8" cy="32" r="3"/></g>
+</svg>

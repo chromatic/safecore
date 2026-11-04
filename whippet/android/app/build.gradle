@@ -1,0 +1,50 @@
+plugins { id 'com.android.application' }
+def debugTools = providers.gradleProperty('safeCoreDebugTools').map { it.toBoolean() }.orElse(false).get()
+
+android {
+    namespace 'org.pepecoinservice.safecore'
+    compileSdk 35
+    buildFeatures { buildConfig true }
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
+    defaultConfig {
+        applicationId 'org.pepecoinservice.safecore.testing'
+        minSdk 26
+        targetSdk 35
+        versionCode 9
+        versionName '0.1.0-test.9'
+        buildConfigField 'boolean', 'DEBUG_TOOLS_ENABLED', debugTools.toString()
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+    }
+    buildTypes {
+        debug { applicationIdSuffix '.qa' }
+        // Native build flag controls screenshots, WebView and Android debugging together.
+        liveTest {
+            initWith release
+            debuggable debugTools
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['release']
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets.main.assets.srcDir layout.buildDirectory.dir('generated/walletAssets')
+}
+
+// Explicit sources only. Never package a browser profile, database, tests or backups.
+tasks.register('bundleWallet', Sync) {
+    from('../../www') {
+        include 'index.html', 'styles.css', 'engine.js', 'viewport.js', 'recovery.js', 'receive.js', 'library.js',
+                'transactions.js', 'scanner.js', 'network.js', 'reporting.js', 'app.js', 'native.js',
+                'assets/pepecoin.png', 'assets/whippet.png', 'assets/corevault.svg',
+                'assets/ethers.umd.min.js', 'assets/ethers.LICENSE', 'assets/qrcode.min.js', 'assets/qrcode.LICENSE', 'assets/whippet-legacy.js', 'assets/jsQR.js', 'assets/jsQR.LICENSE'
+        (1..30).each { include String.format('assets/icons/safecore-%02d.svg', it) }
+        into 'wallet'
+    }
+    into layout.buildDirectory.dir('generated/walletAssets')
+}
+tasks.named('preBuild').configure { dependsOn 'bundleWallet' }
+dependencies { implementation 'androidx.webkit:webkit:1.14.0' }

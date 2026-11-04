@@ -1,0 +1,52 @@
+title = "SafeCore publication scan"
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Upstream NULS parser test keys, matched to public Trezor tests"
+condition = "AND"
+paths = ['''^services/blockbook/bchain/coins/nuls/nulsparser_test\.go$''']
+regexTarget = "secret"
+regexes = ['''^0x995c98115809359eb57a5e179558faddd55ef88f88e5cf58617a5f9f3d6bb3a1$''', '''^0x0f65dee42d3c974c1a4bcc79f141be89715dc8d6406faa9ad4f1f55ca95fabc8$''', '''^0x6fd98d1d9c3f3ac1ff61bbf3f20e89f00ffa8d43a554f2a7d73fd464b6666f45$''', '''^0x21412d9e33aba493faf4bc7d408ed5290bea5b36a7beec554b858051f8d4bff3$''', '''^0xdc3d290e32a4e0f38bc26c25a78ceb1c8779110883d9cb0be54629043c1f8724$''']
+
+[[allowlists]]
+description = "Public Zcash transaction signatures and ephemeral public key in API example"
+condition = "AND"
+paths = ['''^services/blockbook/docs/api\.md$''']
+regexTarget = "secret"
+regexes = ['''^65b9477cb1ec5da\.\.\.1178fe402e5702c646945197108339609$''', '''^feea902e01eac9ebd\.\.\.b43b4af6b607ce5b0b38f708$''', '''^057ff6e059967784fa6ac34ad9ecfd9c0c0aba743b7cd444a65ecc32192d5870$''']
+
+[[allowlists]]
+description = "Public coinbase transaction data, not a Coinbase API token"
+condition = "AND"
+paths = ['''^services/blockbook/tests/sync/testdata/groestlcoin\.json$''']
+regexTarget = "secret"
+regexes = ['''^03a8942104fb2e685b0837ff5e928d0000000d2f6e6f64655374726174756d2f$''']
+
+[[allowlists]]
+description = "Public coinbase transaction data, not a Coinbase API token"
+condition = "AND"
+paths = ['''^services/blockbook/tests/sync/testdata/cpuchain\.json$''']
+regexTarget = "secret"
+regexes = ['''^035838010455906a5d0857ff8ac1000000000d2f6e6f64655374726174756d2f$''']
+
+[[allowlists]]
+description = "Public ERC20 contract addresses in explorer tests"
+condition = "AND"
+paths = ['''^services/blockbook/server/public_ethereumtype_test\.go$''']
+regexTarget = "secret"
+regexes = ['''^0xA4DD6Bc15Be95Af55f0447555c8b6aA3088562f3$''', '''^0xFFFFFFFFFFe95Af55f0447555c8b6aA3088562f3$''']
+
+[[allowlists]]
+description = "Public TokenPay address fixture, not an API token"
+condition = "AND"
+paths = ['''^services/electrumx/tests/lib/test_addresses\.py$''']
+regexTarget = "secret"
+regexes = ['''^TDE2X28FGtckatxuP3d8s3V726G4TLNHpT$''']
+
+[[allowlists]]
+description = "Public shared defaults in byte-identical upstream ethers 5.7.2 bundle"
+condition = "AND"
+paths = ['''^whippet/www/assets/ethers\.umd\.min\.js$''']
+regexTarget = "secret"
+regexes = ['''^_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC$''', '''^9f7d929b018cdffb338517efa06f58359e86ff1ffd350bc889738523659e7972$''', '''^ETHERS_JS_SHARED$''']

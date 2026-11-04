@@ -1,0 +1,16 @@
+# Merge with a deliberately configured, dedicated mainnet node; do not replace
+# an existing node config blindly. RPC is PRIVATE, never a public wallet endpoint.
+server=1
+txindex=1
+prune=0
+disablewallet=1
+rpcport=33873
+rpcbind=127.0.0.1
+rpcallowip=127.0.0.1
+rpcuser=safecore
+rpcpassword=CHANGE_ME
+zmqpubhashblock=tcp://127.0.0.1:33338
+zmqpubhashtx=tcp://127.0.0.1:33338
+# For Docker clients, bind a PRIVATE host interface and allow only the exact
+# Docker subnet, with firewall rules. Loopback alone is not reachable from Docker.
+# Bind ZMQ to the same private reachable interface; ZMQ has no authentication.

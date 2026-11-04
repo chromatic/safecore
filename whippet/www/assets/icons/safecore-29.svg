@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Dual Hub</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="M21 32h22M21 32 11 15m10 17L11 49M43 32 53 15M43 32 53 49" stroke="#43829b" stroke-width="3"/><path d="M21 20a12 12 0 0 0 0 24m22-24a12 12 0 0 1 0 24" stroke="#43829b" stroke-width="2"/><circle cx="11" cy="15" r="5" fill="#45d68e" stroke="#10202d" stroke-width="2"/><circle cx="11" cy="49" r="5" fill="#45d68e" stroke="#10202d" stroke-width="2"/><circle cx="53" cy="15" r="5" fill="#57baff" stroke="#10202d" stroke-width="2"/><circle cx="53" cy="49" r="5" fill="#57baff" stroke="#10202d" stroke-width="2"/><circle cx="21" cy="32" r="9" fill="#45d68e" stroke="#10202d" stroke-width="2"/><circle cx="43" cy="32" r="9" fill="#57baff" stroke="#10202d" stroke-width="2"/><circle cx="21" cy="32" r="3" fill="#e7fff4" stroke="#10202d" stroke-width="2"/><circle cx="43" cy="32" r="3" fill="#e7fff4" stroke="#10202d" stroke-width="2"/>
+</svg>

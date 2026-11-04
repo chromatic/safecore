@@ -1,0 +1,12 @@
+{
+  "coin_name": "Pepecoin",
+  "coin_shortcut": "PEPE",
+  "coin_label": "Pepecoin",
+  "rpc_url": "http://host.docker.internal:33873",
+  "rpc_user": "safecore",
+  "rpc_pass": "CHANGE_ME",
+  "rpc_timeout": 250,
+  "parse": true,
+  "message_queue_binding": "tcp://host.docker.internal:33338",
+  "block_addresses_to_keep": 25000
+}

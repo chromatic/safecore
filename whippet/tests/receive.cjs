@@ -1,0 +1,37 @@
+const assert = require('node:assert/strict');
+const R = require('../www/receive.js');
+const pool = Array.from({length:3},(_,index)=>({index,address:`public-fixture-${index}`}));
+const tx = [{tx_hash:'a'.repeat(64),height:0}];
+const book = R.create(pool);
+assert.equal(book.view().index,0);
+assert.equal(book.view().status,'History unavailable');
+assert.equal(book.view().canNext,false);
+book.next();assert.equal(book.view().index,0);book.latest();
+book.observe(pool[0].address,[]);
+assert.equal(book.view().index,0);
+book.observe(pool[0].address,tx);
+assert.equal(book.view().index,1);
+assert.equal(book.view().status,'History unavailable');
+book.previous();
+assert.equal(book.view().index,0);
+book.observe(pool[1].address,tx);
+assert.equal(book.view().index,0); // Browsing must not be yanked away.
+book.latest(); assert.equal(book.view().index,2);
+book.pin(true); assert.equal(book.view().index,0);
+book.next(); assert.equal(book.view().index,0);
+book.observe(pool[2].address,tx);
+assert.equal(book.view().index,0);
+assert.equal(book.view().exhausted,true);
+book.pin(false); assert.equal(book.view().index,2);
+assert.equal(book.view().automatic,true);
+book.observe(pool[0].address,[]);
+assert.equal(book.view().exhausted,true); // Spent/reorged addresses aren't recycled.
+assert.throws(()=>book.observe('wrong-wallet',tx));
+assert.throws(()=>book.observe(pool[0].address,[{tx_hash:'bad',height:1}]));
+assert.throws(()=>book.observe(pool[0].address,null));
+assert.equal(R.create(pool,{index:999,pinned:false}).view().index,0);
+assert.equal(R.create(pool,{index:2,pinned:true}).view().index,0);
+const restored=R.create(pool,{used:[0,1],index:1});
+assert.equal(restored.view().cursor,2);restored.next();assert.equal(restored.view().index,2);
+assert.equal(restored.view().canNext,false);
+console.log('PASS: receive cursor, history-driven advance, historical browsing, base-address pin, malformed history rejection and pool exhaustion.');

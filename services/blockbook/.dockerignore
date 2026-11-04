@@ -1,0 +1,9 @@
+.git
+*.local.json
+*.local.conf
+.env*
+data
+certs
+*.key
+*.pem
+*.log

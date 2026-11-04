@@ -1,0 +1,14 @@
+{
+  "coin_name": "Pepecoin",
+  "coin_shortcut": "PEPE",
+  "coin_label": "Pepecoin",
+  "rpc_url": "http://192.168.1.131:44873",
+  "rpc_user": "rpc",
+  "rpc_pass": "rpcp",
+  "rpc_timeout": 250,
+  "parse": true,
+  "message_queue_binding": "tcp://192.168.1.131:44338",
+  "subversion": "",
+  "address_format": "",
+  "block_addresses_to_keep": 25000
+}

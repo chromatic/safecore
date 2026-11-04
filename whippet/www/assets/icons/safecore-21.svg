@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Nexus Hub</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="M32 32 32 10M32 32 53 23M32 32 45 51M32 32 19 51M32 32 11 23" stroke="#43829b" stroke-width="3"/><circle cx="32" cy="10" r="5" fill="#45d68e" stroke="#10202d" stroke-width="2"/><circle cx="53" cy="23" r="5" fill="#57baff" stroke="#10202d" stroke-width="2"/><circle cx="45" cy="51" r="5" fill="#45d68e" stroke="#10202d" stroke-width="2"/><circle cx="19" cy="51" r="5" fill="#57baff" stroke="#10202d" stroke-width="2"/><circle cx="11" cy="23" r="5" fill="#45d68e" stroke="#10202d" stroke-width="2"/><circle cx="32" cy="32" r="10" fill="#45d68e" stroke="#10202d" stroke-width="2"/><circle cx="32" cy="32" r="4" fill="#e7fff4" stroke="#10202d" stroke-width="2"/>
+</svg>

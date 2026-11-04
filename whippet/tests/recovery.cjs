@@ -1,0 +1,23 @@
+const assert=require('node:assert/strict'),ethers=require('../www/assets/ethers.umd.min.js');
+const R=require('../www/recovery.js').create(ethers),E=require('../www/engine.js');
+const phrase='abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
+assert.equal(R.inspect(phrase).valid,true);
+assert.equal(R.inspect('  '+phrase.toUpperCase().replaceAll(' ','\n')+' ').valid,true);
+assert.deepEqual(R.inspect(phrase.replace('about','abotu')).invalid,[12]);
+assert.equal(R.inspect(phrase.replace('about','ability')).valid,false);
+assert.equal(R.inspect(phrase.replace('about','ability')).invalid.length,0);
+assert.equal(R.inspect('abandon '.repeat(13)).supported,false);
+assert.equal(R.inspect('').valid,false);
+assert.throws(()=>E.recipe(ethers,phrase.replace('about','abotu')));
+assert.throws(()=>E.recipe(ethers,phrase.replace('about','ability')));
+for(const bytes of [16,20,24,28,32])assert.equal(R.inspect(ethers.utils.entropyToMnemonic(new Uint8Array(bytes))).valid,true);
+assert.ok(R.suggest('aban',4).matches.includes('abandon'));
+assert.ok(R.suggest('ABAN',4).matches.includes('abandon'));
+assert.equal(R.suggest('abandon ',8),null);
+assert.equal(R.suggest('abandon about',3,12),null);
+assert.deepEqual(R.complete('aban',4,4,'abandon'),{text:'abandon ',caret:8});
+assert.deepEqual(R.complete('abandon abou legal',11,11,'about'),{text:'abandon about legal',caret:14});
+assert.equal(R.complete('aban',4,4,'ability'),null);
+assert.equal(R.complete('aban',4,4,'not-a-word'),null);
+assert.equal(R.inspect(phrase).valid,true); // Never modifies an existing phrase.
+console.log('PASS: local prefix suggestions, explicit replacement/caret handling, typo positions, BIP39 word counts/checksum and generation/restore validation.');

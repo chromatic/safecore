@@ -1,0 +1,24 @@
+const assert=require('node:assert/strict'),R=require('../www/reporting.js');
+let now=0;
+const snap=(c,u=0)=>({confirmed:BigInt(c)*100000000n,unconfirmed:BigInt(u)*100000000n,at:now});
+const g=R.create(null,()=>now);
+assert.equal(R.WAIT_MS,25000);
+assert.equal(g.observe(snap(0,1000)).published,true);assert.equal(g.value.unconfirmed,100000000000n);
+assert.equal(g.pending,false);
+assert.equal(R.create().observe(snap(0)).published,true);
+now=46000;g.observe(snap(1000,1000));assert.equal(g.value.confirmed+g.value.unconfirmed,100000000000n);
+now=50000;g.observe(snap(1000));
+now=74999;assert.equal(g.observe(snap(1000)).published,false);
+now=75000;assert.equal(g.observe(snap(1000)).published,true);
+assert.equal(g.value.confirmed,100000000000n);assert.equal(g.value.unconfirmed,0n);
+// Failed refresh resets candidate stability; time passing alone cannot publish.
+now=96000;g.observe(snap(2000));g.invalidate();now=200000;
+assert.equal(g.value.confirmed,100000000000n);
+assert.equal(g.observe(snap(2000)).published,false);
+const cached=R.create(snap(1000),()=>now);assert.equal(cached.observe(snap(1000)).published,true);
+assert.deepEqual(R.worth({pep:snap(1000),wht:snap(0)},.001,1),{value:1,incomplete:false});
+assert.deepEqual(R.worth({pep:snap(1000),wht:snap(1000)},.001,1),{value:1,incomplete:true});
+assert.deepEqual(R.worth({pep:snap(0),wht:snap(1000)},.001,1),{value:null,incomplete:true});
+assert.deepEqual(R.worth({pep:snap(0),wht:snap(0)},null,null),{value:0,incomplete:false});
+assert.deepEqual(R.worth({pep:snap(1000),wht:snap(0)},.001,.5),{value:2,incomplete:false});
+console.log('PASS: immediate first balance including zero, subsequent 25-second fresh-match gate, changed-candidate reset, no timer-only publication, cache continuity, USDT conversion, zero-balance exclusion and unpriced holdings.');

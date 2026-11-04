@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Twin Coins</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <circle cx="24" cy="36" r="19" fill="#45d68e"/><circle cx="24" cy="36" r="14" stroke="#10202d" stroke-width="2"/><path d="m18 36 4 4 8-9" stroke="#10202d" stroke-width="3.5"/><circle cx="42" cy="24" r="17" fill="#57baff" stroke="#10202d" stroke-width="3"/><circle cx="42" cy="24" r="11" stroke="#d6f1ff" stroke-width="1.5"/><path d="m42 15 5 9-5 9-5-9Z" fill="#10202d"/>
+</svg>

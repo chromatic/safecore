@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Keystone</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="m14 16 18-6 18 6-5 29-13 10-13-10Z" fill="#45d68e"/><path d="m32 10 18 6-5 29-13 10Z" fill="#57baff"/><circle cx="32" cy="28" r="6" fill="#10202d"/><path d="m29 32-3 12h12l-3-12" fill="#10202d"/>
+</svg>

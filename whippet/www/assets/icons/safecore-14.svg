@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Block Mint</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="m36 8 17 9-17 10-17-10Z" fill="#57baff"/><path d="M19 17v16l17 10V27Z" fill="#256b8d"/><path d="M53 17v16L36 43V27Z" fill="#3398be"/><circle cx="22" cy="42" r="15" fill="#45d68e" stroke="#10202d" stroke-width="2.5"/><circle cx="22" cy="42" r="10" stroke="#163945" stroke-width="1.5"/><path d="M26 37h-6a3 3 0 0 0 0 6h3a3 3 0 0 1 0 6h-6" stroke="#10202d" stroke-width="2.5"/>
+</svg>

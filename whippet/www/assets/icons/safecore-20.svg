@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>SafeCore — Proof Coin</title>
+  <rect width="64" height="64" rx="16" fill="#10202d"/>
+  <path d="m32 6 6 4 8 1 3 7 6 6-1 8 1 8-6 6-3 7-8 1-6 4-6-4-8-1-3-7-6-6 1-8-1-8 6-6 3-7 8-1Z" fill="#45d68e"/><circle cx="32" cy="32" r="19" fill="#102b32" stroke="#baffe4" stroke-width="1.5"/><path d="m32 19 10 4v9c0 7-10 13-10 13s-10-6-10-13v-9Z" fill="#57baff"/><path d="m27 31 4 4 7-8" stroke="#10202d" stroke-width="3"/>
+</svg>

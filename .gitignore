@@ -1,0 +1,36 @@
+# Operator secrets, private keys and chain/wallet data
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+wallet.dat
+*.sqlite*
+*.db
+*.cookie
+certs/
+secrets/
+data/
+backups/
+*.local.json
+*.local.conf
+*.log
+# Build/cache/artifact output (APKs are published separately as release assets)
+**/build/
+**/.gradle/
+**/local.properties
+node_modules/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+artifacts/
+test-results/
+*.apk
+*.aab
+.DS_Store

@@ -1,0 +1,44 @@
+const assert = require('node:assert/strict');
+const {webcrypto} = require('node:crypto');
+const E = require('../www/engine.js');
+const L = require('../www/library.js');
+const ethers = require('../www/assets/ethers.umd.min.js');
+(async()=>{
+  const recipe = E.recipe(ethers,'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about');
+  const locked = await E.encrypt(webcrypto,recipe,'Public-test-password-123');
+  const open = E.unprotected(webcrypto,recipe);
+  const data = new Map(); let fail = '';
+  const storage = {getItem:k=>data.get(k)||null,setItem:(k,v)=>{if(k===fail)throw Error('Fixture quota failure');data.set(k,v);},removeItem:k=>data.delete(k)};
+  const lib=L.create(storage);
+  storage.setItem(L.ACTIVE,JSON.stringify(locked));
+  assert.equal(lib.list().length,1); // Legacy active record is retained.
+  fail=L.COLLECTION;
+  assert.throws(()=>lib.save(open,'Open wallet'));
+  assert.equal(lib.active().format,E.FORMAT);
+  fail=L.ACTIVE;
+  assert.throws(()=>lib.save(open,'Open wallet'));
+  assert.equal(lib.list().length,2); // New wallet retained even if activation failed.
+  assert.equal(lib.active().format,E.FORMAT);
+  fail='';lib.activate(L.id(open));
+  assert.equal(lib.active().format,E.OPEN_FORMAT);
+  lib.rename(L.id(locked),'Protected original');
+  lib.activate(L.id(locked));
+  assert.equal(lib.active().format,E.FORMAT);
+  await assert.rejects(E.decrypt(webcrypto,lib.active(),'Wrong-test-password-123'));
+  lib.removeActive();
+  assert.equal(lib.active(),null);assert.equal(lib.list().length,1);
+  assert.equal(lib.list()[0].vault.format,E.OPEN_FORMAT);
+  lib.save(locked,'Protected original');
+  const before=JSON.stringify(lib.active());
+  lib.remove(L.id(open));
+  assert.equal(JSON.stringify(lib.active()),before);
+  assert.equal(lib.list().length,1);
+  assert.throws(()=>lib.remove('missing'));
+  fail=L.COLLECTION;assert.throws(()=>lib.remove(L.id(locked)));fail='';
+  assert.equal(lib.list().length,1);assert.equal(JSON.stringify(lib.active()),before);
+  lib.remove(L.id(locked));assert.equal(lib.active(),null);assert.equal(lib.list().length,0);
+  storage.setItem(L.COLLECTION,'broken');
+  assert.throws(()=>lib.save(locked,'Do not overwrite'));
+  assert.equal(storage.getItem(L.COLLECTION),'broken');
+  console.log('PASS: legacy preservation, independent wallet protection, switching, rename, scoped deletion and partial-save failures.');
+})().catch(e=>{console.error(e);process.exitCode=1;});
