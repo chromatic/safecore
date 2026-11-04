@@ -51,7 +51,7 @@ fs.mkdirSync(output, {recursive:true});
       await page.waitForFunction(() => document.documentElement.dataset.walletState === 'unlocked');
       assert.equal(await page.locator('.demo-label').count(), 0);
       await page.locator('[data-nav=receive]').click();await page.locator('#receive-coin').click();await page.locator('[data-coin="wht"]').click();await page.locator('#address').waitFor();
-      await page.clock.runFor(25001);await page.locator('[data-nav="wallet"]').click();
+      await page.clock.runFor(4001);await page.locator('[data-nav="wallet"]').click();
       await page.waitForFunction(()=>document.querySelector('[data-overview-coin=wht] .holding-balance')?.textContent==='0 WHT');
       assert.equal(await page.getByRole('link',{name:'Enable live testing',exact:true}).count(),0);
       const raw = await page.evaluate(key => localStorage.getItem(key), store);

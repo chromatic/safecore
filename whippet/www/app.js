@@ -781,7 +781,7 @@
     document.querySelectorAll('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
     if (['wallet','receive','activity','send'].includes(route) && liveEnabled() && mode === 'unlocked') {
       const targets = route !== 'receive' ? Object.keys(E.NETWORKS) : [receiveCoin];
-      for (const coin of targets) if (E.NETWORKS[coin] && !scans[coin] && Date.now()-(lastRefresh[coin]||0)>20000) void refreshLive(coin);
+      for (const coin of targets) if (E.NETWORKS[coin] && !scans[coin] && Date.now()-(lastRefresh[coin]||0)>WalletReporting.POLL_MS) void refreshLive(coin);
       if(route==='wallet')void refreshPrice();
     }
   }
@@ -842,5 +842,5 @@
       for (const coin of targets) void refreshLive(coin);
       if(['','#wallet'].includes(location.hash))void refreshPrice();
     }
-  },20000);
+  },WalletReporting.POLL_MS);
 })();

@@ -15,12 +15,12 @@ const E=require('../www/engine.js'),ethers=require('../www/assets/ethers.umd.min
    const v=JSON.parse(localStorage.getItem('whippet.dev.encrypted.v1'));
    localStorage.setItem('corevault.send-attempts.'+WalletLibrary.id(v),JSON.stringify([{coin:'pep',txid:'c'.repeat(64),outpoints:['d'.repeat(64)+':0'],at:Date.now(),status:'unknown'}]));
   });
-  await p.clock.runFor(21000);await p.waitForFunction(()=>document.querySelectorAll('.live-tx').length===61);
+  await p.clock.runFor(4001);await p.waitForFunction(()=>document.querySelectorAll('.live-tx').length===61);
   const pep=p.locator('[data-activity-coin=pep]'),wht=p.locator('[data-activity-coin=wht]');
   await pep.locator('summary').click();assert.equal(await pep.locator('.activity-list').isVisible(),true);assert.equal(await wht.locator('.activity-list').isVisible(),false);
   assert.equal(await wht.locator('a').count(),0);assert.equal(await pep.locator('a').count(),31);
   assert.equal(await pep.locator('.activity-list').evaluate(el=>el.scrollHeight>el.clientHeight),true);
-  await pep.locator('.activity-list').evaluate(el=>{el.scrollTop=450;});await p.clock.runFor(21000);
+  await pep.locator('.activity-list').evaluate(el=>{el.scrollTop=450;});await p.clock.runFor(4001);
   assert.equal(await pep.getAttribute('open'),'');assert.equal(await pep.locator('.activity-list').evaluate(el=>el.scrollTop),450);
   assert.equal(await wht.getAttribute('open'),null);
   const link=pep.locator('a').first();assert.equal(await link.getAttribute('rel'),'noopener noreferrer');assert.equal(await link.getAttribute('referrerpolicy'),'no-referrer');

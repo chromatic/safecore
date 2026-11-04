@@ -44,7 +44,8 @@ configuration, CSP and Android external-navigation allowlists consistent.
 
 - Receive discovery is bounded to 20 addresses per supported coin.
 - New validated restores report immediately; subsequent balance changes have a
-  25-second stabilization window. A cached value is not proof of current funds.
+  4-second stabilization window, with 4-second foreground polling. A cached value
+  is not proof of current funds.
 - PEP and WHT use a fixed 0.01 coin fee under conservative transaction-size/input
   limits, not a dynamic mempool estimator. See the wallet guide for exact gates.
 - WHT has no price source: its unknown valuation is shown as `*`, not zero.

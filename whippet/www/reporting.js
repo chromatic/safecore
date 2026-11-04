@@ -1,11 +1,11 @@
-/* Publish changed balances only after a fresh matching observation 25s later.
+/* Publish changed balances only after a fresh matching observation 4s later.
    No delayed payload is published on its own; receiving discovery stays live. */
 (function(root,factory){
   const api=factory();
   if(typeof module==='object'&&module.exports)module.exports=api;
   else root.WalletReporting=api;
 })(typeof globalThis==='object'?globalThis:this,function(){
-  const WAIT_MS=25000;
+  const POLL_MS=4000,WAIT_MS=4000;
   const key=s=>`${s.confirmed}:${s.unconfirmed}`;
   function create(initial=null,now=()=>performance.now()){
     let current=initial,candidate=null;
@@ -40,5 +40,5 @@
     }
     return {value:priced||(!positive&&!incomplete)?total:null,incomplete};
   }
-  return {WAIT_MS,create,worth};
+  return {POLL_MS,WAIT_MS,create,worth};
 });

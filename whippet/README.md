@@ -191,7 +191,7 @@ claim to find every possible balance derived from a seed.
 ## Balances, activity and valuation
 
 Visible, unlocked Overview, Send and Activity refresh both supported coins about every
-20 seconds. Receive refreshes its selected coin. Locking or backgrounding stops
+4 seconds. Receive refreshes its selected coin. Locking or backgrounding stops
 normal scanning; reopening resumes it.
 
 A scan checks history, balances and unspent outputs. Duplicate transaction IDs,
@@ -200,7 +200,7 @@ Partial failed scans are not published as successful snapshots.
 
 The first validated balance is shown immediately, including a genuine zero.
 Subsequent changed confirmed/pending totals must remain consistent for at least
-25 seconds and be observed again in a fresh query. A timer alone never publishes
+4 seconds and be observed again in a fresh query. A timer alone never publishes
 an old candidate. Changed candidates or failed refreshes restart that window.
 
 Accepted totals are cached per saved-wallet identifier and coin. Reloads show a

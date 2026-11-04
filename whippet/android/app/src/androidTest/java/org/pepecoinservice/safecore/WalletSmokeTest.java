@@ -177,7 +177,7 @@ public class WalletSmokeTest extends ActivityInstrumentationTestCase2<MainActivi
         js("WalletNetwork.close();WalletNetwork.scan=async(coin,accounts)=>({coin,tip:500,at:Date.now(),everUsed:[0],confirmed:500000000n,unconfirmed:0n,feeRate:1000000n,rows:accounts.map((account,i)=>({account,confirmed:i?0n:500000000n,unconfirmed:0n,history:[],utxos:[]}))});location.hash='send'");
         until("document.getElementById('send-coin')");
         assertEquals("true",js("!document.getElementById('send-form')"));
-        // The cached zero must pass the normal poll plus 25-second stability gate.
+        // The cached zero must pass the normal poll plus 4-second stability gate.
         until("document.querySelector('[data-send-coin=pep]')",300);
         js("document.getElementById('send-coin').click();document.querySelector('[data-send-coin=pep]').click()");
         until("document.getElementById('scan-address')");

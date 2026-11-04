@@ -1,4 +1,18 @@
-# Initial publication verification
+# Verification
+
+## 0.1.0-test.10 timing update
+
+Foreground polling and changed-balance stabilization both use 4 seconds. Tests
+check no periodic query at 3,999 ms, a query at 4,000 ms, and no publication of a
+changed total until another fresh matching query 4 seconds later. Initial restore
+balances remain immediate. The candidate-reset, stale-result, cache-isolation and
+in-flight scan guards are unchanged; wallet storage and derivation are unchanged.
+
+Core wallet tests and the reporting, send-picker and activity browser regressions
+pass. Android liveTest build/lint and the exact bundled-source audit pass with
+debugging/screenshots disabled and the existing signing certificate retained.
+
+## Initial publication
 
 Checks performed against the standalone source tree for 0.1.0-test.9:
 

@@ -5,10 +5,17 @@ with the release checksum and inspect its signing-certificate fingerprint with
 Android's `apksigner verify --print-certs`. Hashes detect changed bytes; they are
 not an independent security audit or proof that source is safe.
 
-The base prerelease is SafeCore 0.1.0-test.9, Android 8.0+ (API 26), with
+The current prerelease is SafeCore 0.1.0-test.10, Android 8.0+ (API 26), with
 `safeCoreDebugTools=false`. USB/WebView debugging and screenshots are disabled.
 It starts without saved wallets on a fresh installation. It contains no desktop
 database, recovery material, RPC credentials or signing private key.
+
+Version 0.1.0-test.10 reduces foreground polling from 20 to 4 seconds and the
+changed-balance stability wait from 25 to 4 seconds, retaining a fresh matching
+server query before publication. Initial restore balances remain immediate.
+Changed balances normally appear within roughly 8 seconds of server visibility,
+plus request time, when reports stay consistent. The original base APK remains
+available under 0.1.0-test.9.
 
 This sideload APK uses the existing local development signing identity. It is
 not production release signing. Android requires a matching package/signature
