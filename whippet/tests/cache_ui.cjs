@@ -1,5 +1,6 @@
 // Disposable browser and public fixtures. No real Electrum connections or sends.
 const assert=require('node:assert/strict'),{webcrypto}=require('node:crypto');
+const {expect}=require('playwright/test');
 const {chromium}=require('./browser-helper.cjs'),E=require('../www/engine.js'),ethers=require('../www/assets/ethers.umd.min.js');
 (async()=>{
   const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true});
@@ -9,7 +10,7 @@ const {chromium}=require('./browser-helper.cjs'),E=require('../www/engine.js'),e
     await context.addInitScript(()=>{window.fetch=async()=>{throw Error('Fixture offline');};window.WebSocket=class{constructor(){throw Error('Fixture offline');}};});
     await page.goto('http://localhost:8787/');
     assert.equal(await page.locator('[data-overview-coin=pep] .holding-balance').innerText(),'* PEP');
-    await page.locator('[data-nav="activity"]').click();assert.match(await page.locator('#main').innerText(),/transactions will appear/);
+    await page.locator('[data-nav="activity"]').click();await expect(page.locator('#main')).toContainText(/transactions will appear/);
     const recipe=E.recipe(ethers,'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about');
     const vault=E.unprotected(webcrypto,recipe);
     await page.evaluate(vault=>{
